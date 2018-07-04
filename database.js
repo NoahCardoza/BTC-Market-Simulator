@@ -7,7 +7,7 @@ module.exports = {
     return low(new FileAsync('db.json')).then(db => {
       db.defaults({
         users: [],
-        price: random.integer(5000, 7000)
+        price: 0 // random.integer(5000, 7000)
       }).write()
       return db
     })

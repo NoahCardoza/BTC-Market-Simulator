@@ -58,6 +58,7 @@ module.exports = (app, db) => {
   }
 
   app.post('/signup', (req, res) => {
+    console.log(req.body);
     if (!req.body.email || !req.body.password) {
       res.status(413).send({
         message: 'Invalid body data.'
@@ -66,7 +67,7 @@ module.exports = (app, db) => {
       const token = hat()
       db.get('users').push({
         ...req.body,
-        balance: 10000,
+        balance: 5000,
         btc: 1,
         token
       }).write()
