@@ -1,4 +1,4 @@
 {
   "verbose": true,
-  "ignore": ["node_modules/", "db.json"]
+  "ignore": ["node_modules/", "db.json", "socket"]
 }
