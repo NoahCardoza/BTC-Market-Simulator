@@ -22,7 +22,6 @@ const convertRange = (value, r1, r2) => (value - r1[0]) * (r2[1] - r2[0]) / (r1[
 const clamp = [-maxPrice, maxPrice]
 
 module.exports = (app, db) => {
-
   const handelClient = c =>{ //'connection' listener
     console.log('Soket Client Connected');
     c.on('data', data => {
@@ -38,6 +37,8 @@ module.exports = (app, db) => {
   const exitGracefully = () => server.close()
 
   server.on('close', () => {
+    console.log('exited');
+    process.exit()
     process.exit()
   })
 
@@ -160,7 +161,7 @@ module.exports = (app, db) => {
       res.status(422).send({
         message: 'Must specify parameter: amount.'
       })
-    } else if (amount <= 0 || cost > user.balance) {
+    } else if (!amount || amount <= 0 || cost > user.balance) {
       logger.info(`${user.email} tried to buy ${amount} BTC costing ${cost} but they only have $${user.balance}.`)
       res.status(422).send({
         message: 'Invalid amount.'
@@ -186,7 +187,7 @@ module.exports = (app, db) => {
       res.status(422).send({
         message: 'Must specify parameter: amount.'
       })
-    } else if (amount <= 0 || amount > user.btc) {
+    } else if (!amount || amount <= 0 || amount > user.btc) {
       logger.info(`${user.email} tried to buy ${amount} BTC earning ${profit} but they only have ${user.btc} BTC.`)
       res.status(422).send({
         message: 'Invalid amount.'

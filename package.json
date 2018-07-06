@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/nodemon/bin/nodemon.js app.js | grep -Eov '^\\x1b\\[33m\\[nodemon\\]'"
+    "start": "node app.js",
+    "dev": "./node_modules/nodemon/bin/nodemon.js --delay 3500ms app.js | grep -Eov '^\\x1b\\[33m\\[nodemon\\]'"
   },
   "keywords": [],
   "author": "Noah Cardoza <noahcardoza@gmail.com>",
